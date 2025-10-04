@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phase Calendar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://kit.fontawesome.com/3dee4c5dfb.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="Phase Calendar Logo.png">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R9KY2D8RVK"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-R9KY2D8RVK');
+    </script>
+</head>
+<body>
+    <div class="header-with-logo">
+        <img src="Phase Calendar Logo.png" alt="Phase Calendar Logo" class="main-logo">
+        <h1>Phase Calendar</h1>
+    </div>
+
+    <div class="top-left-buttons">
+        <select id="eventCategoryFilter" class="header-filter-select"></select>
+        <input type="text" id="eventSearchInput" placeholder="Search all events..." class="header-search-input">
+    </div>
+
+    <div class="top-right-buttons">
+        <span id="loggedInUsername" class="hidden"></span>
+        <button id="aboutBtn" class="header-button">About</button>
+        <button id="logoutBtn" class="header-button">Login</button>
+    </div>
+
+    <div id="authSection" class="auth-form-container hidden">
+        <div id="loginFormContainer">
+            <h2>Login</h2>
+            <input type="text" id="loginUsername" placeholder="Username">
+            <span id="loginUsernameError" class="error-message"></span>
+            <input type="password" id="loginPassword" placeholder="Password">
+            <span id="loginPasswordError" class="error-message"></span>
+            <button id="loginBtn">Login</button>
+            <div class="auth-toggle-link">
+                Don't have an account? <a id="showSignup">Sign Up</a>
+            </div>
+            <div class="auth-toggle-link">
+                <a id="continueAsGuest">Continue as Guest</a>
+            </div>
+        </div>
+
+        <div id="signupFormContainer" class="hidden">
+            <h2>Sign Up</h2>
+            <input type="text" id="signupUsername" placeholder="Username">
+            <span id="signupUsernameError" class="error-message"></span>
+            <input type="password" id="signupPassword" placeholder="Password">
+            <span id="signupPasswordError" class="error-message"></span>
+            <button id="signupBtn">Sign Up</button>
+            <div class="auth-toggle-link">
+                Already have an account? <a id="showLogin">Login</a>
+            </div>
+            <div class="auth-toggle-link">
+                <a id="continueAsGuestSignup">Continue as Guest</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="appContent">
+        <div class="year-picker-container">
+            <button id="toggleTraditionalBtn">Hide Calendar</button>
+            <div class="date-section left-date">
+                <span id="selectedTraditionalDate"></span>
+            </div>
+            <div class="year-controls">
+                <button id="prevYearBtn">&lt;&lt;</button>
+                <span id="currentYearDisplay" class="year-text"></span>
+                <button id="nextYearBtn">&gt;&gt;</button>
+                <button id="todayBtn">Today</button>
+            </div>
+            <div class="date-section right-date">
+                <span id="selectedNewCalendarDate"></span>
+            </div>
+            <button id="toggleEventsBtn">View Events</button>
+        </div>
+
+        <div class="container">
+            <div class="calendar traditional-calendar"></div>
+            <div class="calendar new-calendar"></div>
+            <div class="event-panel hidden">
+                <h3 id="eventPanelDate">Select a date to view events</h3>
+                <ul id="eventList" class="event-list">
+                    </ul>
+                <div class="event-form" id="addEventForm">
+                    <div id="newEventFields" class="hidden">
+                        <input type="text" id="newEventText" placeholder="New Event Name">
+                        <span id="newEventTextError" class="error-message"></span>
+                        <textarea id="newEventNotesTextarea" placeholder="Event notes (optional)"></textarea>
+                        <div class="category-options">
+                            <label for="newEventCategory">Category:</label>
+                            <select id="newEventCategory"></select>
+                        </div>
+                        <div class="recurrence-options">
+                            <div class="recurrence-pattern-group">
+                                <label for="newRecurrencePattern">Repeats:</label>
+                                <select id="newRecurrencePattern">
+                                    <option value="none">None</option>
+                                    <option value="weekly">Weekly</option>
+                                    <option value="subphasely">Subphasely</option>
+                                    <option value="phasely">Phasely</option>
+                                    <option value="yearly">Yearly</option>
+                                </select>
+                            </div>
+                            <div id="newNumberOfRepeatsContainer" class="hidden">
+                                <label for="newNumberOfRepeats">Times:</label>
+                                <input type="number" id="newNumberOfRepeats" min="1" placeholder="Number of repeats">
+                            </div>
+                        </div>
+                    </div>
+                    <button id="addEventBtn">Add Event</button>
+                </div>
+
+                <div id="editEventForm" class="hidden event-form">
+                    <span id="editingEventIdDisplay"></span>
+                    <input type="text" id="editEventDescription" placeholder="Event description">
+                    <span id="editEventDescriptionError" class="error-message"></span>
+                    <textarea id="eventNotesTextarea" placeholder="Write notes here..."></textarea>
+                    <div class="category-options">
+                        <label for="editEventCategory">Category:</label>
+                        <select id="editEventCategory"></select>
+                    </div>
+                    <div id="editRecurrenceOptionsContainer" class="recurrence-options">
+                        <div class="recurrence-pattern-group">
+                            <label for="editRecurrencePattern">Repeats:</label>
+                            <select id="editRecurrencePattern">
+                                <option value="none">None</option>
+                                <option value="weekly">Weekly</option>
+                                <option value="subphasely">Subphasely</option>
+                                <option value="phasely">Phasely</option>
+                                <option value="yearly">Yearly</option>
+                            </select>
+                        </div>
+                        <div id="editNumberOfRepeatsContainer" class="hidden">
+                            <label for="editNumberOfRepeats">Times:</label>
+                            <input type="number" id="editNumberOfRepeats" min="1" placeholder="Number of repeats">
+                        </div>
+                    </div>
+                    <button id="saveNotesBtn">Save Changes</button>
+                    <button id="cancelNotesBtn">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <div id="custom-confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <p id="confirm-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-yes" class="confirm-button confirm-yes">Yes</button>
+                <button id="confirm-no" class="confirm-button confirm-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="about-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>About the Phase Calendar</h2>
+            <p>The Phase Calendar offers a <strong>simple, unique, and visually intuitive way to organize and view the year.</strong> Instead of traditional months, it divides the year into <strong>five distinct phases</strong>:</p>
+            <ul>
+                <li><strong>Prophase (P)</strong></li>
+                <li><strong>Metaphase (M)</strong></li>
+                <li><strong>Anaphase (A)</strong></li>
+                <li><strong>Telophase (T)</strong></li>
+                <li><strong>Interphase (I)</strong></li>
+            </ul>
+            <p>Each of these main phases is further structured into two subphases: an <strong>"Early" (E)</strong> and a <strong>"Late" (L)</strong> section. These subphases are then broken down into a <strong>6x6 grid of days</strong>. For clear visual distinction, each row within these grids is both named and color-coded (R, G, B, C, Y, V), while columns are labeled 1-6.</p>
+            <p>Days of the year are referenced using a concise format: the subphase letter ("E" or "L"), followed by the main phase letter ("P," "M," "A," "T," or "I"), and then the subphase grid coordinates (e.g., "R1").</p>
+            <p><strong>For example:</strong></p>
+            <ul>
+                <li>The very first day of the year is designated <strong>"EPR1."</strong></li>
+                <li>This is followed by "EPR2," and so on.</li>
+                <li>When the end of a row is reached, the next day begins the following row. For instance, the seventh day of the year is <strong>"EPG1."</strong></li>
+            </ul>
+            <p>At the conclusion of each main phase, a special <strong>"CO Day" (Change Over Day)</strong> marks the transition to the next phase. There are five such "CO Days," each uniquely named after the phases it connects. For example, the "CO Day" between Prophase (P) and Metaphase (M) is called <strong>"PMCO."</strong></p>
+            <p>This innovative calendar provides an alternative framework for planning, project management, or personal goal setting, offering a fresh perspective on time organization and daily tracking.</p>
+            <div class="modal-buttons">
+                <button id="about-close-btn" class="confirm-button confirm-no">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/utils.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/calendarRenderer.js"></script>
+    <script type="module" src="js/eventManager.js"></script>
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
