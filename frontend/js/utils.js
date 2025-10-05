@@ -12,7 +12,7 @@ export let currentSearchTerm = ''; // Default to empty search term
 export let isSearchModeActive = false; // Flag to indicate if search results are being displayed
 
 
-export const API_BASE_URL = 'hhttps://phase-calendar-api.onrender.com/api';
+export const API_BASE_URL = 'https://phase-calendar-api.onrender.com/api';
 export const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 // Phase Calendar Definitions

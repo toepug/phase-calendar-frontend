@@ -10,6 +10,7 @@ import {
     fetchAndRenderEvents,
     populateCategorySelect,
     setupRecurrenceListeners // NEW: Import the new setup function
+    renderEventsForSelectedDay
 } from './eventManager.js';
 import {
     displayedYear,
