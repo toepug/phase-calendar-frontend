@@ -9,7 +9,7 @@ import {
     addEvent,
     fetchAndRenderEvents,
     populateCategorySelect,
-    setupRecurrenceListeners // NEW: Import the new setup function
+    setupRecurrenceListeners, // NEW: Import the new setup function
     renderEventsForSelectedDay
 } from './eventManager.js';
 import {
