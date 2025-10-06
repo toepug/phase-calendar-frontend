@@ -340,7 +340,7 @@ function generateNewCalendar(year) {
         const leapDayContainer = document.createElement('div');
         leapDayContainer.className = 'co-day-container';
 
-        const leapDay = createDayElement('IPCO2');
+        const leapDay = createDayElement('ICD');
         leapDay.className = 'co-day';
         leapDay.dataset.dayOfYear = 366;
         leapDay.dataset.year = year;
