@@ -220,25 +220,16 @@ export function renderEventsForSelectedDay() {
     let filteredEvents = [];
     let panelTitle = '';
 
-    // Events are now stored with keys like "2025-1", and their values are arrays of event objects.
-    // Each event object might be a master event, a generated instance, or a modified instance.
-    // The `fetchAndRenderEvents` function is responsible for populating `events` with the correctly
-    // filtered and modified set for the `displayedYear` (and surrounding years for recurrence expansion).
-
     if (isSearchModeActive) {
         panelTitle = `Search Results for "${currentSearchTerm}"`;
         const lowerCaseSearchTerm = currentSearchTerm.toLowerCase();
 
-        // Iterate through all "expanded" events
         for (const eventKey in events) {
             const [yearStr] = eventKey.split('-');
             const eventYear = parseInt(yearStr);
 
-            // If a user is logged in, only search events within the displayed year.
-            // If guest, search all expanded events (which would be for the displayed year by default unless modified).
-            // For search mode, we include events from any year that have been expanded.
-            if (currentUserId !== null) { // If logged in, search only events related to displayed year for performance
-                 if (eventYear >= displayedYear -2 && eventYear <= displayedYear + 2) { // Search expanded range
+            if (currentUserId !== null) { 
+                 if (eventYear >= displayedYear -2 && eventYear <= displayedYear + 2) { 
                     events[eventKey].forEach(eventObj => {
                         const matchesCategory = (currentCategoryFilter === 'All' || eventObj.category === currentCategoryFilter);
                         const matchesSearch = (
@@ -250,7 +241,7 @@ export function renderEventsForSelectedDay() {
                         }
                     });
                  }
-            } else { // Guest mode, only events generated for current year will be in 'events'
+            } else {
                 events[eventKey].forEach(eventObj => {
                     const matchesCategory = (currentCategoryFilter === 'All' || eventObj.category === currentCategoryFilter);
                     const matchesSearch = (
@@ -272,7 +263,6 @@ export function renderEventsForSelectedDay() {
         });
 
     } else if (selectedDayOfYear !== null && selectedYear !== null) {
-        // Normal day selection mode: Filter events for the selected day
         const tempDate = new Date(selectedYear, 0);
         tempDate.setDate(selectedDayOfYear);
         panelTitle = `Events for ${getNewCalendarDate(selectedDayOfYear, selectedYear)}`;
@@ -280,7 +270,7 @@ export function renderEventsForSelectedDay() {
         const eventKey = `${selectedYear}-${selectedDayOfYear}`;
         let dayEvents = events[eventKey] || [];
 
-        const lowerCaseSearchTerm = currentSearchTerm.toLowerCase(); // Apply search/filter even in day view
+        const lowerCaseSearchTerm = currentSearchTerm.toLowerCase();
         dayEvents = dayEvents.filter(eventObj => {
             const matchesCategory = (currentCategoryFilter === 'All' || eventObj.category === currentCategoryFilter);
             const matchesSearch = (
@@ -322,11 +312,8 @@ export function renderEventsForSelectedDay() {
         filteredEvents.forEach(eventObj => {
             const listItem = document.createElement('li');
             listItem.className = 'event-item';
-            // NEW: Use eventObj.id for master, or eventObj.tempInstanceId for modified instances
-            // This is crucial for distinguishing between master and modified instances in the UI
-            // and linking back to the correct backend endpoint.
-            listItem.dataset.eventId = eventObj.id; // Master event ID OR Modification ID
-            listItem.dataset.eventKey = eventObj.event_key; // For instance-specific actions
+            listItem.dataset.eventId = eventObj.id;
+            listItem.dataset.eventKey = eventObj.event_key;
 
             const eventHeaderRow = document.createElement('div');
             eventHeaderRow.className = 'event-header-row';
@@ -358,7 +345,6 @@ export function renderEventsForSelectedDay() {
                 titleElement.appendChild(categoryTag);
             }
 
-            // Display recurrence pattern if not 'none' and not in search mode
             if (eventObj.recurrence_pattern && eventObj.recurrence_pattern !== 'none') {
                 const recurrenceTag = document.createElement('span');
                 recurrenceTag.className = 'event-category-tag category-Recurrence';
@@ -368,7 +354,6 @@ export function renderEventsForSelectedDay() {
                 }
                 titleElement.appendChild(recurrenceTag);
 
-                // Add a visual indicator for recurring instances
                 if (eventObj.isRecurringInstance) {
                     const instanceIndicator = document.createElement('i');
                     instanceIndicator.className = 'fa-solid fa-arrows-rotate recurring-instance-icon';
@@ -376,16 +361,14 @@ export function renderEventsForSelectedDay() {
                     titleElement.appendChild(instanceIndicator);
                 }
             }
-            // NEW: Indicator for Modified Instances
             if (eventObj.isModifiedInstance) {
                 const modifiedIndicator = document.createElement('i');
-                modifiedIndicator.className = 'fa-solid fa-pencil-ruler modified-instance-icon'; // A different icon for modification
+                modifiedIndicator.className = 'fa-solid fa-pencil-ruler modified-instance-icon';
                 modifiedIndicator.title = 'Modified Event Instance';
                 titleElement.appendChild(modifiedIndicator);
             }
 
 
-            // Conditionally create and append action buttons (view/edit/delete)
             if (!isSearchModeActive) {
                 const actionsDiv = document.createElement('div');
                 actionsDiv.className = 'event-actions';
@@ -405,29 +388,25 @@ export function renderEventsForSelectedDay() {
 
                 const editIcon = document.createElement('i');
                 editIcon.className = 'fa-solid fa-pen-to-square edit-event-icon';
-                editIcon.title = 'Edit Event'; // More general title
+                editIcon.title = 'Edit Event';
                 editIcon.style.cursor = 'pointer';
 
-                // Pass all necessary data for editing, including flags for master vs. instance
-                editIcon.dataset.originalEventId = eventObj.originalEventId || eventObj.id; // Master ID
-                editIcon.dataset.eventKey = eventObj.event_key; // Current instance's event key
+                editIcon.dataset.originalEventId = eventObj.originalEventId || eventObj.id;
+                editIcon.dataset.eventKey = eventObj.event_key;
                 editIcon.dataset.isRecurringMaster = eventObj.isRecurringMaster ? 'true' : 'false';
                 editIcon.dataset.isRecurringInstance = eventObj.isRecurringInstance ? 'true' : 'false';
                 editIcon.dataset.isModifiedInstance = eventObj.isModifiedInstance ? 'true' : 'false';
-
                 editIcon.dataset.eventTitle = eventObj.description;
                 editIcon.dataset.eventNotes = eventObj.notes || '';
                 editIcon.dataset.eventCategory = eventObj.category || 'General';
-                editIcon.dataset.recurrencePattern = eventObj.recurrence_pattern || 'none'; // Only relevant for master
-                editIcon.dataset.numberOfRepeats = eventObj.number_of_repeats || ''; // Only relevant for master
+                editIcon.dataset.recurrencePattern = eventObj.recurrence_pattern || 'none';
+                editIcon.dataset.numberOfRepeats = eventObj.number_of_repeats || '';
 
                 editIcon.addEventListener('click', function() {
-                    // Decide which edit function to call based on event type
                     const isMaster = this.dataset.isRecurringMaster === 'true' && this.dataset.isRecurringInstance === 'false';
                     const isModified = this.dataset.isModifiedInstance === 'true';
 
                     if (isMaster) {
-                        // Editing the master event, will affect all future occurrences
                         showToast('Editing this master event will update all its recurring occurrences.', 'info');
                         showEditMasterEvent(
                             parseInt(this.dataset.originalEventId),
@@ -438,7 +417,6 @@ export function renderEventsForSelectedDay() {
                             this.dataset.numberOfRepeats
                         );
                     } else if (isModified) {
-                         // Editing an already modified instance, just update its modification
                         showToast('You are editing a single modified instance.', 'info');
                         showEditSingleInstance(
                             parseInt(this.dataset.originalEventId),
@@ -448,15 +426,13 @@ export function renderEventsForSelectedDay() {
                             this.dataset.eventCategory
                         );
                     } else {
-                        // Editing a regular recurring instance (not yet modified)
-                        // This will create a new modification for this specific instance
                         showToast('Editing this recurring event instance will create a single-day modification.', 'info');
                         showEditSingleInstance(
                             parseInt(this.dataset.originalEventId),
                             this.dataset.eventKey,
-                            this.dataset.eventNotes, // Pass the current notes of the instance
-                            this.dataset.eventTitle, // Pass the current description of the instance
-                            this.dataset.eventCategory // Pass the current category of the instance
+                            this.dataset.eventNotes,
+                            this.dataset.eventTitle,
+                            this.dataset.eventCategory
                         );
                     }
                 });
@@ -472,6 +448,7 @@ export function renderEventsForSelectedDay() {
                 deleteButton.dataset.isRecurringMaster = eventObj.isRecurringMaster ? 'true' : 'false';
                 deleteButton.dataset.isRecurringInstance = eventObj.isRecurringInstance ? 'true' : 'false';
                 deleteButton.dataset.isModifiedInstance = eventObj.isModifiedInstance ? 'true' : 'false';
+                deleteButton.dataset.recurrencePattern = eventObj.recurrence_pattern || 'none';
 
                 deleteButton.addEventListener('click', async (event) => {
                     event.preventDefault();
@@ -482,10 +459,10 @@ export function renderEventsForSelectedDay() {
                     if (isMaster) {
                         await deleteMasterEvent(
                             parseInt(deleteButton.dataset.originalEventId),
-                            deleteButton
+                            deleteButton,
+                            deleteButton.dataset.recurrencePattern
                         );
                     } else if (isInstance || isModified) {
-                        // Both regular instances and modified instances are deleted as exceptions
                         await deleteRecurringInstance(
                             parseInt(deleteButton.dataset.originalEventId),
                             deleteButton.dataset.eventKey,
@@ -903,7 +880,7 @@ export async function addEvent() {
  * @param {number} eventId - The ID of the master event to delete.
  * @param {HTMLElement} buttonElement - The button element that triggered the deletion.
  */
-export async function deleteMasterEvent(eventId, buttonElement) {
+export async function deleteMasterEvent(eventId, buttonElement, recurrencePattern = 'none') {
     if (currentUserId === null) {
         showToast('Please log in to delete events.', 'info');
         return;
@@ -914,13 +891,18 @@ export async function deleteMasterEvent(eventId, buttonElement) {
         return;
     }
 
-    const confirmed = await showConfirm('Are you sure you want to delete this master event and ALL its recurring occurrences/modifications? This cannot be undone.');
+    const isRecurring = recurrencePattern && recurrencePattern !== 'none';
+    const message = isRecurring
+        ? 'Are you sure you want to delete this master event and ALL its recurring occurrences/modifications? This cannot be undone.'
+        : 'Are you sure you want to delete this event?';
+
+    const confirmed = await showConfirm(message);
     if (!confirmed) {
         toggleLoading(buttonElement, false, 'x');
         return;
     }
 
-    showToast('Deleting event series...', 'info');
+    showToast('Deleting event...', 'info');
     toggleLoading(buttonElement, true, 'x');
 
     try {
@@ -940,7 +922,7 @@ export async function deleteMasterEvent(eventId, buttonElement) {
             data = { message: 'Invalid response from server' };
         }
         if (response.ok) {
-            showToast(data.message || 'Event series deleted successfully!', 'success');
+            showToast(data.message || 'Event deleted successfully!', 'success');
             await fetchAndRenderEvents(displayedYear);
         } else {
             console.error('Failed to delete master event:', {
@@ -948,11 +930,11 @@ export async function deleteMasterEvent(eventId, buttonElement) {
                 statusText: response.statusText,
                 body: responseText.slice(0, 200)
             });
-            showToast(`Failed to delete master event: ${data.message || response.statusText || 'Unknown error'}`, 'error');
+            showToast(`Failed to delete event: ${data.message || response.statusText || 'Unknown error'}`, 'error');
         }
     } catch (error) {
         console.error('Error deleting master event:', error);
-        showToast('An error occurred while deleting the master event. Check backend server connection.', 'error');
+        showToast('An error occurred while deleting the event.', 'error');
     } finally {
         toggleLoading(buttonElement, false, 'x');
     }
