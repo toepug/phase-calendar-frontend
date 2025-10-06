@@ -232,7 +232,6 @@ function generateNewCalendar(year) {
         const phaseRow = document.createElement('div');
         phaseRow.className = 'phase-row';
 
-        // Mapping from row label (R, G, B, C, Y, M) to CSS color name
         const labelToColorNameMap = {
             'R': 'red', 'G': 'green', 'B': 'blue',
             'C': 'cyan', 'Y': 'yellow', 'V': 'violet'
@@ -251,7 +250,7 @@ function generateNewCalendar(year) {
             const monthGrid = document.createElement('div');
             monthGrid.className = 'new-month';
 
-            for (let i = 0; i < 6; i++) { // Loop for 6 rows of 7 cells
+            for (let i = 0; i < 6; i++) {
                 const currentRowLabel = rowLabels[i];
                 const backgroundColor = rowColors[currentRowLabel];
 
@@ -263,7 +262,7 @@ function generateNewCalendar(year) {
 
                 const rowColorName = labelToColorNameMap[currentRowLabel];
 
-                for (let day = 1; day <= 6; day++) { // Loop for 6 days per row
+                for (let day = 1; day <= 6; day++) {
                     const dayElement = createDayElement(day);
 
                     if (rowColorName) {
@@ -273,7 +272,6 @@ function generateNewCalendar(year) {
                     dayElement.dataset.dayOfYear = currentDayCounter;
                     dayElement.dataset.year = year;
 
-                    // Add tooltip for events
                     const eventKey = `${year}-${dayElement.dataset.dayOfYear}`;
                     if (events[eventKey] && events[eventKey].length > 0) {
                         dayElement.classList.add('has-events');
@@ -302,21 +300,16 @@ function generateNewCalendar(year) {
         });
 
         phaseGroup.appendChild(phaseRow);
-
         container.appendChild(phaseGroup);
 
-        // CO Day - IMPORTANT: Append CO day container directly to the main container,
-        // AFTER the phaseGroup, so it's outside the phaseGroup's border.
         const coContainer = document.createElement('div');
         coContainer.className = 'co-day-container';
 
         const coDay = createDayElement(phase.co);
         coDay.className = 'co-day';
-
         coDay.dataset.dayOfYear = currentDayCounter;
         coDay.dataset.year = year;
 
-        // Add tooltip for events on CO day
         const eventKey = `${year}-${coDay.dataset.dayOfYear}`;
         if (events[eventKey] && events[eventKey].length > 0) {
             coDay.classList.add('has-events');
@@ -340,4 +333,38 @@ function generateNewCalendar(year) {
         coContainer.appendChild(coDay);
         container.appendChild(coContainer);
     });
+
+    // --- NEW CODE BLOCK TO HANDLE LEAP YEAR ---
+    const isLeap = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    if (isLeap) {
+        const leapDayContainer = document.createElement('div');
+        leapDayContainer.className = 'co-day-container';
+
+        const leapDay = createDayElement('IPCO2');
+        leapDay.className = 'co-day';
+        leapDay.dataset.dayOfYear = 366;
+        leapDay.dataset.year = year;
+
+        leapDay.addEventListener('click', function() {
+            const dayOfYearClicked = parseInt(this.dataset.dayOfYear);
+            const clickedYear = parseInt(this.dataset.year);
+            updateCalendarSelection(dayOfYearClicked, clickedYear, container);
+        });
+
+        const eventKey = `${year}-366`;
+        if (events[eventKey] && events[eventKey].length > 0) {
+            leapDay.classList.add('has-events');
+            const tooltip = document.createElement('div');
+            tooltip.className = 'day-tooltip';
+            tooltip.innerHTML = events[eventKey].map(e => e.description).join('<br>');
+            leapDay.appendChild(tooltip);
+        }
+
+        if (getDayOfYear(today) === 366 && year === today.getFullYear()) {
+            leapDay.classList.add('highlight');
+        }
+
+        leapDayContainer.appendChild(leapDay);
+        container.appendChild(leapDayContainer);
+    }
 }
