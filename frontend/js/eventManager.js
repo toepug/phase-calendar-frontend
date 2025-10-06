@@ -922,7 +922,11 @@ export async function deleteMasterEvent(eventId, buttonElement, recurrencePatter
             data = { message: 'Invalid response from server' };
         }
         if (response.ok) {
-            showToast(data.message || 'Event deleted successfully!', 'success');
+            // --- THIS IS THE CHANGED LOGIC ---
+            const successMessage = isRecurring
+                ? (data.message || 'Event series deleted successfully!')
+                : 'Event deleted successfully!';
+            showToast(successMessage, 'success');
             await fetchAndRenderEvents(displayedYear);
         } else {
             console.error('Failed to delete master event:', {
