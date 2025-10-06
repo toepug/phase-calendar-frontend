@@ -887,8 +887,7 @@ h1 {
     justify-content: center;
     align-items: center;
     margin-bottom: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
+    /* padding-top and border-top have been removed */
 }
 
 .co-day {
