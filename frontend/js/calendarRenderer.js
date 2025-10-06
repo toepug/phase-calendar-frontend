@@ -93,10 +93,9 @@ function updateDisplayedSelectedDate() {
     const selectedNewCalendarDateSpan = document.getElementById('selectedNewCalendarDate');
     const eventPanelDate = document.getElementById('eventPanelDate');
 
-
     if (selectedDayOfYear !== null && selectedYear !== null) {
-        const tempDate = new Date(selectedYear, 0);
-        tempDate.setDate(selectedDayOfYear);
+        // CORRECTED LINE: This now correctly creates the date from the day of the year.
+        const tempDate = new Date(selectedYear, 0, selectedDayOfYear);
 
         selectedTraditionalDateSpan.textContent = formatTraditionalDate(tempDate);
         const newCalFormat = getNewCalendarDate(selectedDayOfYear, selectedYear);
