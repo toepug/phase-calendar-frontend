@@ -1245,14 +1245,17 @@ export async function fetchAndRenderEvents(year) {
         const { masterEvents, exceptions, modifications } = await response.json();
 
         if (response.ok) {
-            const newEvents = {}; // This will store the expanded and modified events
-            const exceptionSet = new Set(exceptions.flatMap(([id, keys]) => keys)); // Flatten and create set for quick lookup
-            const modificationMap = new Map(modifications.map(([id, mods]) => [id, new Map(mods)])); // original_event_id -> Map(event_key -> mod_details)
+            const newEvents = {};
+            
+            // --- THIS IS THE CORRECTED LINE ---
+            const exceptionSet = new Set(exceptions.flatMap(([id, keys]) => keys.map(key => `${id},${key}`)));
+            
+            const modificationMap = new Map(modifications.map(([id, mods]) => [id, new Map(mods)]));
 
             masterEvents.forEach(eventObj => {
                 const {
                     id,
-                    event_key, // This is the event_key of the master event
+                    event_key,
                     description,
                     notes,
                     category,
@@ -1260,37 +1263,33 @@ export async function fetchAndRenderEvents(year) {
                     number_of_repeats
                 } = eventObj;
 
-                // Add the original master event occurrence
                 if (!newEvents[event_key]) {
                     newEvents[event_key] = [];
                 }
 
-                // Check for a modification for the master event's original date
                 const masterModification = modificationMap.has(id) ? modificationMap.get(id).get(event_key) : null;
-                const masterIsExcepted = exceptionSet.has(`${id},${event_key}`); // Check if master event's original date is explicitly excluded
+                const masterIsExcepted = exceptionSet.has(`${id},${event_key}`);
 
-                if (!masterIsExcepted) { // Only add if not explicitly excluded
+                if (!masterIsExcepted) {
                     newEvents[event_key].push({
-                        id: id, // Master event ID
+                        id: id,
                         description: masterModification ? masterModification.description : description,
                         event_key: event_key,
                         notes: masterModification ? masterModification.notes : notes || '',
                         category: masterModification ? masterModification.category : category || 'General',
                         recurrence_pattern: recurrence_pattern || 'none',
                         number_of_repeats: number_of_repeats || null,
-                        isRecurringMaster: true, // Mark as master event
-                        isModifiedInstance: !!masterModification // Mark if the master's own date is modified
+                        isRecurringMaster: true,
+                        isModifiedInstance: !!masterModification
                     });
                 }
 
-
-                // Handle recurring events expansion
                 if (recurrence_pattern && recurrence_pattern !== 'none' && number_of_repeats !== null && number_of_repeats > 0) {
                     let currentRecurrenceDate = new Date(parseInt(event_key.split('-')[0]), 0);
                     currentRecurrenceDate.setDate(parseInt(event_key.split('-')[1]));
 
                     let generatedCount = 0;
-                    const maxIterationsSafety = 5 * 366; // Safety limit
+                    const maxIterationsSafety = 5 * 366;
                     let iterationCounter = 0;
 
                     while (generatedCount < number_of_repeats && iterationCounter < maxIterationsSafety) {
@@ -1302,24 +1301,23 @@ export async function fetchAndRenderEvents(year) {
                         const nextYear = nextOccurrence.getFullYear();
                         const nextEventKey = `${nextYear}-${nextDayOfYear}`;
 
-                        // Check for exceptions or modifications for this specific occurrence
                         const isExcepted = exceptionSet.has(`${id},${nextEventKey}`);
                         const modification = modificationMap.has(id) ? modificationMap.get(id).get(nextEventKey) : null;
 
-                        if (!isExcepted) { // Only add if not explicitly excepted
+                        if (!isExcepted) {
                             if (!newEvents[nextEventKey]) {
                                 newEvents[nextEventKey] = [];
                             }
                             newEvents[nextEventKey].push({
-                                id: id, // Original master event ID
+                                id: id,
                                 description: modification ? modification.description : eventObj.description,
-                                event_key: nextEventKey, // This event_key is for the specific occurrence
+                                event_key: nextEventKey,
                                 notes: modification ? modification.notes : eventObj.notes || '',
                                 category: modification ? modification.category : eventObj.category || 'General',
-                                isRecurringInstance: true, // Mark as an instance
-                                isModifiedInstance: !!modification, // Mark if this instance is modified
-                                originalEventId: eventObj.id, // Link back to the original database event ID
-                                originalEventKey: event_key, // Link back to the original event's day key
+                                isRecurringInstance: true,
+                                isModifiedInstance: !!modification,
+                                originalEventId: eventObj.id,
+                                originalEventKey: event_key,
                                 recurrence_pattern: recurrence_pattern,
                                 number_of_repeats: number_of_repeats
                             });
