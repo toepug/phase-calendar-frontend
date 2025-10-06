@@ -78,10 +78,9 @@ export function formatTraditionalDate(date) {
 
 // Rewritten to return custom phase calendar date string (e.g., LAR5)
 export function getNewCalendarDate(dayOfYear, year) {
-    // NEW: Added a check for the leap day first
     const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
     if (isLeapYear && dayOfYear === 366) {
-        return 'ICD'; // Return your custom name for the leap day
+        return 'ICD';
     }
 
     const daysInYear = isLeapYear ? 366 : 365;
@@ -103,7 +102,22 @@ export function getNewCalendarDate(dayOfYear, year) {
         if (dayOfYear >= phase.startDay && dayOfYear < phase.startDay + phaseLength) {
             const dayInPhase = dayOfYear - phase.startDay + 1;
 
-            if (dayInPhase === phaseLength) {
+            // --- CORRECTED LOGIC FOR CO DAY DETECTION ---
+            let isCoDay = false;
+            // Special case for the last phase in a leap year
+            if (isLeapYear && i === phases.length - 1) {
+                // IPCO is now the second-to-last day of the phase
+                if (dayInPhase === phaseLength - 1) {
+                    isCoDay = true;
+                }
+            } else {
+                // Original logic for non-leap years and all other phases
+                if (dayInPhase === phaseLength) {
+                    isCoDay = true;
+                }
+            }
+
+            if (isCoDay) {
                 return phase.co;
             } else {
                 const daysPerMonthSection = 36;
