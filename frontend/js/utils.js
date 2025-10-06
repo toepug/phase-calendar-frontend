@@ -78,14 +78,18 @@ export function formatTraditionalDate(date) {
 
 // Rewritten to return custom phase calendar date string (e.g., LAR5)
 export function getNewCalendarDate(dayOfYear, year) {
+    // NEW: Added a check for the leap day first
     const isLeapYear = (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+    if (isLeapYear && dayOfYear === 366) {
+        return 'ICD'; // Return your custom name for the leap day
+    }
+
     const daysInYear = isLeapYear ? 366 : 365;
 
     if (dayOfYear < 1 || dayOfYear > daysInYear) {
         return `Day ${dayOfYear} (Invalid)`;
     }
 
-    let currentPhaseDayCount = 0;
     for (let i = 0; i < phases.length; i++) {
         const phase = phases[i];
         let phaseLength;
@@ -103,7 +107,6 @@ export function getNewCalendarDate(dayOfYear, year) {
                 return phase.co;
             } else {
                 const daysPerMonthSection = 36;
-
                 let monthTypePrefix = '';
                 let dayWithinSection = dayInPhase;
 
@@ -116,17 +119,14 @@ export function getNewCalendarDate(dayOfYear, year) {
 
                 const row = Math.ceil(dayWithinSection / 6);
                 const col = (dayWithinSection - 1) % 6 + 1;
-
                 const rowLetter = rowLabels[row - 1];
 
                 return `${monthTypePrefix}${phase.short}${rowLetter}${col}`;
             }
         }
     }
-
     return `Day ${dayOfYear} of ${year}`;
 }
-
 /**
  * Scrolls the parent container to bring the target element into the middle of the view.
  * @param {HTMLElement} container The scrollable parent element.
