@@ -55,13 +55,25 @@ export function getDayOfYear(date) {
     return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
 
+// Helper function for ordinal suffixes (st, nd, rd, th)
+function getOrdinalSuffix(day) {
+    // Handles 11th, 12th, 13th
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+        case 1:  return "st";
+        case 2:  return "nd";
+        case 3:  return "rd";
+        default: return "th";
+    }
+}
+
 export function formatTraditionalDate(date) {
-    return date.toLocaleDateString('default', {
-        weekday: 'short',
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric'
-    });
+    const weekday = date.toLocaleDateString('default', { weekday: 'long' });
+    const month = date.toLocaleDateString('default', { month: 'long' });
+    const day = date.getDate();
+    const suffix = getOrdinalSuffix(day);
+
+    return `${weekday}, ${month} ${day}${suffix}`;
 }
 
 // Rewritten to return custom phase calendar date string (e.g., LAR5)
