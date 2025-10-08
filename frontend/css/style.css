@@ -1176,3 +1176,13 @@ h1 {
 .recurring-instance-icon {
     margin-left: 5px;
 }
+
+/* Fix for linked header on blog pages */
+.header-with-logo a,
+.header-with-logo a:visited {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
