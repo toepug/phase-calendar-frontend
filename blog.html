@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Phase Calendar Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .blog-list-container { max-width: 800px; margin: 40px auto; }
+        .article-preview { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .article-preview h2 a { text-decoration: none; color: #2c3e50; }
+        .article-preview h2 a:hover { color: #3498db; }
+        .article-preview p { color: #555; }
+        .article-preview .date { font-size: 0.9em; color: #7f8c8d; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header-with-logo">
+        <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+             <img src="Phase Calendar Logo.png" alt="Phase Calendar Logo" class="main-logo">
+             <h1>Phase Calendar</h1>
+        </a>
+    </div>
+
+    <div id="article-list" class="blog-list-container">
+        </div>
+
+    <script src="js/articles.js"></script>
+    
+    <script>
+        const articleListContainer = document.getElementById('article-list');
+        
+        articles.forEach(article => {
+            const articleDiv = document.createElement('div');
+            articleDiv.className = 'article-preview';
+            
+            articleDiv.innerHTML = `
+                <p class="date">${article.date}</p>
+                <h2><a href="${article.url}">${article.title}</a></h2>
+                <p>${article.description}</p>
+            `;
+            
+            articleListContainer.appendChild(articleDiv);
+        });
+    </script>
+</body>
+</html>
