@@ -2,21 +2,27 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phase Calendar Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/3dee4c5dfb.js" crossorigin="anonymous"></script>
     <link rel="icon" type="image/png" href="/phase-calendar-logo.png">
     <style>
-        .blog-list-container { max-width: 800px; margin: 40px auto; }
-        .article-preview { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .blog-list-container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .article-preview { background: white; padding: 25px; border-radius: 8px; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: transform 0.2s; }
+        .article-preview:hover { transform: translateY(-5px); }
         .article-preview h2 a { text-decoration: none; color: #2c3e50; }
         .article-preview h2 a:hover { color: #3498db; }
-        .article-preview p { color: #555; }
+        .article-preview p { color: #555; line-height: 1.6; }
         .article-preview .date { font-size: 0.9em; color: #7f8c8d; margin-bottom: 10px; }
     </style>
 </head>
 <body>
     <div class="header-with-logo">
-        <a href="index.html" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
              <img src="/phase-calendar-logo.png" alt="Phase Calendar Logo" class="main-logo">
              <h1>Phase Calendar</h1>
         </a>
@@ -30,56 +36,89 @@
     </div>
 
     <div id="article-list" class="blog-list-container">
-        </div>
+        <!-- The list of articles will be automatically inserted here by JavaScript -->
+    </div>
 
-    <script src="js/articles.js"></script>
-    
+    <!-- Modals for About/Confirm Functionality -->
+    <div id="about-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>About the Phase Calendar</h2>
+            <p>The Phase Calendar offers a <strong>simple, unique, and visually intuitive way to organize and view the year.</strong> Instead of traditional months, it divides the year into <strong>five distinct phases</strong>:</p>
+            <ul>
+                <li><strong>Prophase (P)</strong></li>
+                <li><strong>Metaphase (M)</strong></li>
+                <li><strong>Anaphase (A)</strong></li>
+                <li><strong>Telophase (T)</strong></li>
+                <li><strong>Interphase (I)</strong></li>
+            </ul>
+            <p>Each of these main phases is further structured into two subphases: an <strong>"Early" (E)</strong> and a <strong>"Late" (L)</strong> section. These subphases are then broken down into a <strong>6x6 grid of days</strong>. For clear visual distinction, each row within these grids is both named and color-coded (R, G, B, C, Y, V), while columns are labeled 1-6.</p>
+            <p>Days of the year are referenced using a concise format: the subphase letter ("E" or "L"), followed by the main phase letter ("P," "M," "A," "T," or "I"), and then the subphase grid coordinates (e.g., "R1").</p>
+            <p><strong>For example:</strong></p>
+            <ul>
+                <li>The very first day of the year is designated <strong>"EPR1."</strong></li>
+                <li>This is followed by "EPR2," and so on.</li>
+                <li>When the end of a row is reached, the next day begins the following row. For instance, the seventh day of the year is <strong>"EPG1."</strong></li>
+            </ul>
+            <p>At the conclusion of each main phase, a special <strong>"CO Day" (Change Over Day)</strong> marks the transition to the next phase. There are five such "CO Days," each uniquely named after the phases it connects. For example, the "CO Day" between Prophase (P) and Metaphase (M) is called <strong>"PMCO."</strong></p>
+            <p>This innovative calendar provides an alternative framework for planning, project management, or personal goal setting, offering a fresh perspective on time organization and daily tracking.</p>
+            <div class="modal-buttons">
+                <button id="about-close-btn" class="confirm-button confirm-no">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="custom-confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <p id="confirm-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-yes" class="confirm-button confirm-yes">Yes</button>
+                <button id="confirm-no" class="confirm-button confirm-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to build the article list -->
+    <script src="/js/articles.js"></script>
     <script>
         const articleListContainer = document.getElementById('article-list');
-        
         articles.forEach(article => {
             const articleDiv = document.createElement('div');
             articleDiv.className = 'article-preview';
-            
             articleDiv.innerHTML = `
                 <p class="date">${article.date}</p>
-                <h2><a href="${article.url}">${article.title}</a></h2>
+                <h2><a href="/${article.url}">${article.title}</a></h2>
                 <p>${article.description}</p>
             `;
-            
             articleListContainer.appendChild(articleDiv);
         });
     </script>
-    <script type="module">
-        // Simple script to handle login/logout and about modal visibility
-        // Note: This assumes a simplified auth state check for display purposes
 
-        const logoutBtn = document.getElementById('logoutBtn');
-        const loggedInUsernameSpan = document.getElementById('loggedInUsername');
+    <!-- Script to handle header button functionality -->
+    <script>
+        const aboutBtn = document.getElementById('aboutBtn');
+        const aboutModal = document.getElementById('about-modal');
+        const aboutCloseBtn = document.getElementById('about-close-btn');
 
-        // A very basic check to see if we can guess the user is logged in
-        // This part of the app doesn't have the full auth state, so we make a best guess
-        // For a more robust solution, you'd share state, but this works for display
-        if (loggedInUsernameSpan) {
-            // We can't know the username here, but we can see if the button should say "Logout"
-            // This is a placeholder; a full implementation would require more complex state management
-        }
+        if (aboutBtn && aboutModal && aboutCloseBtn) {
+            aboutBtn.addEventListener('click', () => {
+                aboutModal.classList.remove('hidden');
+            });
 
-        if (logoutBtn) {
-            logoutBtn.addEventListener('click', () => {
-                // Since we can't truly log out from here, we'll just redirect to the main app
-                window.location.href = '/';
+            aboutCloseBtn.addEventListener('click', () => {
+                aboutModal.classList.add('hidden');
+            });
+
+            aboutModal.addEventListener('click', (event) => {
+                if (event.target === aboutModal) {
+                    aboutModal.classList.add('hidden');
+                }
             });
         }
-        
-        // About modal functionality would need to be recreated or linked from the main JS files.
-        // For simplicity, this example just redirects. A better solution would be a shared component.
-        const aboutBtn = document.getElementById('aboutBtn');
-        if (aboutBtn) {
-            aboutBtn.addEventListener('click', () => {
-                // Redirect to the main page and open the about modal from there
-                // This is a simple workaround.
-                 window.location.href = '/#about';
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                window.location.href = '/';
             });
         }
     </script>
