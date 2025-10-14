@@ -22,6 +22,13 @@
         </a>
     </div>
 
+    <div class="top-right-buttons">
+        <span id="loggedInUsername" class="hidden"></span>
+        <a href="/blog.html"><button class="header-button">Blog</button></a>
+        <button id="aboutBtn" class="header-button">About</button>
+        <button id="logoutBtn" class="header-button">Login</button>
+    </div>
+
     <div id="article-list" class="blog-list-container">
         </div>
 
@@ -42,6 +49,39 @@
             
             articleListContainer.appendChild(articleDiv);
         });
+    </script>
+    <script type="module">
+        // Simple script to handle login/logout and about modal visibility
+        // Note: This assumes a simplified auth state check for display purposes
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        const loggedInUsernameSpan = document.getElementById('loggedInUsername');
+
+        // A very basic check to see if we can guess the user is logged in
+        // This part of the app doesn't have the full auth state, so we make a best guess
+        // For a more robust solution, you'd share state, but this works for display
+        if (loggedInUsernameSpan) {
+            // We can't know the username here, but we can see if the button should say "Logout"
+            // This is a placeholder; a full implementation would require more complex state management
+        }
+
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                // Since we can't truly log out from here, we'll just redirect to the main app
+                window.location.href = '/';
+            });
+        }
+        
+        // About modal functionality would need to be recreated or linked from the main JS files.
+        // For simplicity, this example just redirects. A better solution would be a shared component.
+        const aboutBtn = document.getElementById('aboutBtn');
+        if (aboutBtn) {
+            aboutBtn.addEventListener('click', () => {
+                // Redirect to the main page and open the about modal from there
+                // This is a simple workaround.
+                 window.location.href = '/#about';
+            });
+        }
     </script>
 </body>
 </html>
