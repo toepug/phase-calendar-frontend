@@ -3,133 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Discover how the 4-day work week boosts productivity and well-being, and why the Phase Calendar’s 6-day row solves scheduling woes. Try it today!">
-    <title>The 4-Day Work Week & The Calendar Problem | Phase Calendar</title>
+    
+    <!-- SEO Optimized Title -->
+    <title>The 4-Day Work Week & The Calendar Problem | Phase Calendar Blog</title>
+    
+    <!-- SEO Meta Description -->
+    <meta name="description" content="Explore the benefits of a 4-day work week and the logistical challenges it faces with the 7-day calendar. See how the Phase Calendar's 6-day structure offers a solution.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/3dee4c5dfb.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/phase-calendar-logo.png">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        .article-date {
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 30px;
         }
-        h1 {
-            font-size: 2.2em;
+        .blog-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.7;
             color: #333;
         }
-        h2 {
-            font-size: 1.8em;
-            color: #444;
-            margin-top: 30px;
-        }
-        h4 {
-            font-size: 1.4em;
-            color: #555;
-        }
-        p {
+        .blog-container h2 {
+            font-size: 2em;
+            color: #2c3e50;
             margin-bottom: 20px;
         }
-        a {
-            color: #007bff;
+        .blog-container h4 {
+            font-size: 1.4em;
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        .blog-container a {
+            color: #3498db;
             text-decoration: none;
         }
-        a:hover {
+        .blog-container a:hover {
             text-decoration: underline;
         }
-        table {
-            border-collapse: collapse;
+        .blog-container table {
             width: 100%;
+            border-collapse: collapse;
             margin: 20px 0;
         }
-        th, td {
+        .blog-container th, .blog-container td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: center;
         }
-        th {
-            background-color: #f4f4f4;
+        .blog-container th {
+            background-color: #f2f2f2;
         }
-        .cta-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            border-radius: 5px;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-        .cta-button:hover {
-            background-color: #218838;
-            text-decoration: none;
-        }
+        .work-day { background-color: #e9f5ff; }
+        .off-day { background-color: #d4edda; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>The 4-Day Work Week Revolution: Solve Calendar Chaos with Phase Calendar</h1>
+    <div class="header-with-logo">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+             <img src="/phase-calendar-logo.png" alt="Phase Calendar Logo" class="main-logo">
+             <h1>Phase Calendar</h1>
+        </a>
+    </div>
 
-    <h2>Introduction: The Rise of the 4-Day Work Week</h2>
-    <p>The <strong>4-day work week</strong> is no longer a pipe dream—it’s a global movement transforming how we work and live. From tech startups to government offices, companies worldwide are embracing a shorter work week to enhance productivity, reduce burnout, and promote <strong>work-life balance</strong>. This shift, driven by data-backed trials and innovative employers, shows that working smarter, not longer, delivers results for both employees and businesses. By cutting the standard 40-hour week to 32 hours without slashing pay, organizations are unlocking happier teams, sharper focus, and even bigger profits. But as this trend gains momentum, a hidden challenge emerges: the traditional 7-day Gregorian calendar doesn’t play nice with the 4-day work week’s rhythm. Enter <strong>The Phase Calendar</strong>, a groundbreaking app designed to sync seamlessly with modern schedules like the “4 days on, 2 days off” model.</p>
+    <div class="top-right-buttons">
+        <span id="loggedInUsername" class="hidden"></span>
+        <a href="/blog.html"><button class="header-button">Blog</button></a>
+        <button id="aboutBtn" class="header-button">About</button>
+        <button id="logoutBtn" class="header-button">Login</button>
+    </div>
 
-    <h2>Provide Proof: The 4-Day Work Week Works Wonders</h2>
-    <p>The <strong>4-day work week</strong> isn’t just hype—it’s backed by hard evidence from real-world experiments that highlight its transformative power. Let’s explore three landmark examples that prove a shorter work week delivers.</p>
+    <div class="blog-container">
+        <h2>The 4-Day Work Week Is Here. But Is Our Calendar Ready?</h2>
+        <p class="article-date">October 8, 2025</p>
 
-    <h4>The UK’s Game-Changing Trial</h4>
-    <p>In 2022, <a href="https://www.4dayweek.com/" target="_blank" rel="noopener">4 Day Week Global</a> launched the world’s largest <strong>4-day work week</strong> trial in the UK, involving 61 companies and nearly 3,000 employees across industries like finance, hospitality, and tech. Partnering with researchers from the University of Cambridge and Boston College, the six-month pilot tested a 32-hour week with no pay cuts. The results were staggering: company revenue increased by 1.4% on average (and 35% compared to prior years), while employee turnover plummeted by 57%. Workers reported a 71% drop in burnout, 39% less stress, and a 65% reduction in sick days. A whopping 92% of companies continued the model post-trial, with 51% making it permanent. This trial shows the <strong>4-day work week</strong> is a win-win for productivity and <strong>work-life balance</strong>.</p>
+        <p>
+            The idea of a 4-day work week is rapidly moving from a distant dream to a practical reality. Companies and even entire countries are proving that working less can lead to living more—all while maintaining or even boosting productivity. This isn't a fantasy; it's a data-backed movement for a more balanced and efficient future.
+        </p>
+        <p>
+            But as this modern approach to work gains momentum, it's starting to collide with a hidden, centuries-old obstacle: the rigid 7-day structure of our Gregorian calendar.
+        </p>
 
-    <h4>Microsoft Japan’s Productivity Leap</h4>
-    <p>Across the globe, Microsoft Japan made headlines in 2019 with its “Work-Life Choice Challenge.” For one month, 2,300 employees enjoyed five consecutive Fridays off while maintaining full salaries. The outcome? A 40% spike in productivity (measured by sales per employee), a 23% reduction in electricity use, and a 25% drop in unplanned leave. By capping meetings at 30 minutes and encouraging digital communication over emails, Microsoft optimized workflows. Over 90% of employees reported feeling more energized, as noted in <a href="https://www.microsoft.com/en-us/worklab/work-trend-index" target="_blank" rel="noopener">Microsoft’s official report</a>. This experiment underscores how a <strong>shorter work week</strong> can drive efficiency without sacrificing output.</p>
+        <h4>It's Not a Trend, It's a Proven Success</h4>
+        <p>
+            The evidence in favor of a shorter work week is overwhelming. <strong><a href="https://www.4dayweek.com/" target="_blank">4 Day Week Global</a></strong>, a non-profit organization, conducted the world's largest trial in the United Kingdom, involving over 60 companies. The results were a resounding success:
+        </p>
+        <ul>
+            <li>Company revenue stayed broadly the same, with some even seeing significant increases.</li>
+            <li>71% of employees reported lower levels of burnout, and 39% said they were less stressed.</li>
+            <li>Employee resignations dropped by a staggering 57%.</li>
+        </ul>
+        <p>
+            This isn't an isolated case. A well-documented 2019 trial by <strong>Microsoft Japan</strong> reported a 40% jump in productivity. Early pioneers in New Zealand, like the company <strong>Perpetual Guardian</strong>, saw employee engagement soar and stress levels fall after making the switch. From tech companies like <strong>Kickstarter</strong> in the US to national pilot programs in <strong>Spain</strong> and <strong>Belgium</strong>, the data consistently shows that a 4-day week is a win-win for both people and profits.
+        </p>
 
-    <h4>Kickstarter’s Creative Boost</h4>
-    <p>In the U.S., crowdfunding giant Kickstarter joined the <strong>4-day work week</strong> movement in 2022 through 4 Day Week Global’s U.S. pilot. By 2023, they’d made the 32-hour week permanent, typically working Monday through Thursday. The result? Quarterly goals jumped from 70% completion to over 90%, as employees channeled extra time into creative and personal pursuits. Former team member Brooke McDaniel shared that the schedule enhanced her focus, social life, and even home organization, though global teams occasionally disrupted off-hours. Kickstarter’s success, highlighted in <a href="https://www.kickstarter.com/" target="_blank" rel="noopener">their blog</a>, proves the <strong>4-day work week</strong> fuels innovation in values-driven companies.</p>
-    <p>These examples—spanning continents and industries—show that a <strong>shorter work week</strong> boosts productivity, slashes stress, and fosters happier, more engaged teams. But there’s a catch.</p>
+        <h4>The Awkward 7-Day Problem</h4>
+        <p>
+            While some companies adopt a fixed schedule (like giving every Friday off), many industries that require more continuous coverage run into a mathematical problem. A highly efficient <strong>"4 days on, 2 days off"</strong> schedule has a 6-day cycle (4+2=6) that simply doesn't fit neatly into a 7-day week. This creates a constantly rolling weekend that is always out of sync with the standard Saturday-Sunday model.
+        </p>
+        <p>
+            <strong>Scenario 1: A "4 On, 2 Off" Schedule on the Gregorian Calendar</strong>
+        </p>
+        <p>
+            Imagine a standard calendar. Your work schedule would constantly shift, with [W] for Work and [O] for Off:
+        </p>
+        <table>
+            <tr>
+                <th>Sun</th> <th>Mon</th> <th>Tue</th> <th>Wed</th> <th>Thu</th> <th>Fri</th> <th>Sat</th>
+            </tr>
+            <tr>
+                <td></td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="off-day">[O]</td> <td class="off-day">[O]</td>
+            </tr>
+            <tr>
+                <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="off-day">[O]</td> <td class="off-day">[O]</td> <td class="work-day">[W]</td>
+            </tr>
+            <tr>
+                <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="off-day">[O]</td> <td class="off-day">[O]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td>
+            </tr>
+        </table>
+        <p>
+            As you can see, your 2-day weekend is always moving: first it's Friday/Saturday, then Thursday/Friday, then Wednesday/Thursday. This creates social friction, making it difficult to plan activities with friends and family who operate on a traditional schedule.
+        </p>
 
-    <h2>Introduce a Problem: The Gregorian Calendar’s Mismatch</h2>
-    <p>While the <strong>4-day work week</strong> promises a brighter, more balanced future, it stumbles against an ancient obstacle: the 7-day structure of the Gregorian calendar. For industries requiring continuous coverage—like healthcare, retail, or emergency services—a “4 days on, 2 days off” schedule creates a 6-day cycle that clashes with the standard 7-day week. This mismatch results in a “rolling” weekend that shifts unpredictably, disrupting plans with friends, family, or even public services like transit or childcare.</p>
-    <p>Imagine trying to schedule a dinner with loved ones when your days off are never fixed. One week, you’re free Thursday and Friday; the next, it’s Friday and Saturday; then Wednesday and Thursday. This constant drift creates social friction and undermines the very <strong>work-life balance</strong> the <strong>4-day work week</strong> aims to deliver. Here’s a table showing this awkward shuffle over three weeks on a Gregorian calendar (W = Work, O = Off):</p>
-    <table>
-        <tr>
-            <th>Week</th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
-        </tr>
-        <tr>
-            <td>1</td><td>W</td><td>W</td><td>W</td><td>W</td><td>O</td><td>O</td><td></td>
-        </tr>
-        <tr>
-            <td>2</td><td>W</td><td>W</td><td>W</td><td>W</td><td>O</td><td>O</td><td>W</td>
-        </tr>
-        <tr>
-            <td>3</td><td>W</td><td>W</td><td>W</td><td>O</td><td>O</td><td>W</td><td>W</td>
-        </tr>
-    </table>
-    <p>Notice the chaos? Your weekends slide across the week, making it tough to sync with others or maintain a routine. This logistical headache threatens to dim the <strong>4-day work week</strong>’s shine—unless you have a better calendar.</p>
+        <h4>A More Compatible Structure: The Phase Calendar</h4>
+        <p>
+            What if the "week" itself was more flexible? The Phase Calendar isn't built on a 7-day cycle. Its core unit is a <strong>6-day row</strong>.
+        </p>
+        <p>
+            The number six is beautifully divisible. It allows a "4 days on, 2 days off" schedule to coexist perfectly with a traditional, consistent 2-day weekend.
+        </p>
+        <p>
+            <strong>Scenario 2: A "4 On, 2 Off" Schedule on the Phase Calendar</strong>
+        </p>
+        <p>
+            Here, your work schedule fits into the 6-day row, repeating perfectly every single time.
+        </p>
+        <table>
+            <tr>
+                <th>Day 1</th> <th>Day 2</th> <th>Day 3</th> <th>Day 4</th> <th>Day 5</th> <th>Day 6</th>
+            </tr>
+            <tr>
+                <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="off-day">[O]</td> <td class="off-day">[O]</td>
+            </tr>
+             <tr>
+                <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="off-day">[O]</td> <td class="off-day">[O]</td>
+            </tr>
+             <tr>
+                <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="work-day">[W]</td> <td class="off-day">[O]</td> <td class="off-day">[O]</td>
+            </tr>
+        </table>
+        <p>
+            In this model, your work week is shorter, but your weekend is <strong>always</strong> consistent. You get all the proven benefits of a 4-day work week without the social and planning chaos of a constantly shifting weekend.
+        </p>
+        <p>
+            As we rethink <em>how</em> we work, it's also worth rethinking the tools we use to structure our time. The 4-day work week is a data-driven, forward-thinking idea, and it deserves a calendar that is just as forward-thinking.
+        </p>
+        <p>
+            Ready to explore a calendar built for a modern work-life balance? <strong><a href="https://phasecalendar.com">Try the Phase Calendar today.</a></strong>
+        </p>
+    </div>
 
-    <h2>Present the Solution: The Phase Calendar’s 6-Day Advantage</h2>
-    <p>Say hello to <a href="https://phasecalendar.com" target="_blank" rel="noopener">The Phase Calendar</a>, a revolutionary app built from the ground up to support modern schedules like the <strong>4-day work week</strong>. Unlike the Gregorian calendar’s clunky 7-day weeks and uneven months, The Phase Calendar reimagines the year as five symmetrical phases—Prophase, Metaphase, Anaphase, Telophase, and Interphase—each divided into Early and Late subphases with 6x6 grids of days. The core unit? A <strong>6-day row</strong>, perfectly aligned with the “4 days on, 2 days off” rhythm.</p>
-    <p>This isn’t just a cosmetic change. The Phase Calendar’s structure eliminates the scheduling friction of the Gregorian system. Days are labeled intuitively (e.g., EPR1 for the first day of Prophase’s Early subphase, row R, column 1), and color-coded rows (R, G, B, C, Y, V) make planning visually effortless. Special “Change Over Days” between phases add a rhythmic transition, ideal for project milestones or personal resets. By syncing with the 6-day cycle of a <strong>shorter work week</strong>, The Phase Calendar ensures your schedule stays consistent and predictable.</p>
+    <!-- Modals for About/Confirm Functionality -->
+    <div id="about-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>About the Phase Calendar</h2>
+            <p>The Phase Calendar offers a <strong>simple, unique, and visually intuitive way to organize and view the year.</strong> Instead of traditional months, it divides the year into <strong>five distinct phases</strong>...</p>
+            <!-- (Full about text would go here) -->
+            <div class="modal-buttons">
+                <button id="about-close-btn" class="confirm-button confirm-no">Close</button>
+            </div>
+        </div>
+    </div>
 
-    <h2>Show the Difference: Seamless Scheduling with Phase Calendar</h2>
-    <p>To see the Phase Calendar’s magic, let’s compare. On the Gregorian calendar, the “4 on, 2 off” schedule creates a drifting weekend that’s hard to pin down. On The Phase Calendar, the 6-day row becomes a stable foundation, with your work and rest days repeating flawlessly in every row. Here’s how a “4 days on, 2 days off” schedule looks over three rows (W = Work, O = Off):</p>
-    <table>
-        <tr>
-            <th>Row</th><th>Day 1</th><th>Day 2</th><th>Day 3</th><th>Day 4</th><th>Day 5</th><th>Day 6</th>
-        </tr>
-        <tr>
-            <td>1</td><td>W</td><td>W</td><td>W</td><td>W</td><td>O</td><td>O</td>
-        </tr>
-        <tr>
-            <td>2</td><td>W</td><td>W</td><td>W</td><td>W</td><td>O</td><td>O</td>
-        </tr>
-        <tr>
-            <td>3</td><td>W</td><td>W</td><td>W</td><td>W</td><td>O</td><td>O</td>
-        </tr>
-    </table>
-    <p>No more sliding weekends. Your days off—say, Days 5 and 6—stay fixed, making it easy to plan social events, hobbies, or simply time to recharge. This consistency amplifies the <strong>4-day work week</strong>’s benefits, letting you enjoy predictable rest that aligns with family, friends, or community schedules. Whether you’re a nurse working shifts or a creative plotting projects, The Phase Calendar keeps your <strong>work-life balance</strong> intact.</p>
+    <div id="custom-confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <p id="confirm-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-yes" class="confirm-button confirm-yes">Yes</button>
+                <button id="confirm-no" class="confirm-button confirm-no">No</button>
+            </div>
+        </div>
+    </div>
 
-    <h2>Conclusion: Embrace the Future with The Phase Calendar</h2>
-    <p>The <strong>4-day work week</strong> is more than a trend—it’s a data-driven revolution that’s reshaping how we work, live, and thrive. But to fully unlock its potential, we need tools that match its forward-thinking spirit. The Phase Calendar is that tool, offering a sleek, intuitive framework that ditches the Gregorian calendar’s outdated quirks for a 6-day row system tailored to modern rhythms. By aligning perfectly with the “4 days on, 2 days off” model, it delivers the consistency and clarity you need to make the most of a <strong>shorter work week</strong>—without the scheduling chaos.</p>
-    <p>Whether you’re a business leader piloting a <strong>4-day work week</strong>, a team member craving <strong>work-life balance</strong>, or an individual ready to rethink time, The Phase Calendar empowers you to plan with precision and live with purpose. Don’t let an ancient calendar hold back your modern ambitions. <a href="https://phasecalendar.com" class="cta-button">Download The Phase Calendar today</a> and step into a year of seamless phases. Your future self—enjoying that extra day off—will thank you!</p>
+    <!-- Script to handle header button functionality -->
+    <script>
+        const aboutBtn = document.getElementById('aboutBtn');
+        const aboutModal = document.getElementById('about-modal');
+        const aboutCloseBtn = document.getElementById('about-close-btn');
+
+        if (aboutBtn && aboutModal && aboutCloseBtn) {
+            aboutBtn.addEventListener('click', () => {
+                aboutModal.classList.remove('hidden');
+            });
+
+            aboutCloseBtn.addEventListener('click', () => {
+                aboutModal.classList.add('hidden');
+            });
+
+            aboutModal.addEventListener('click', (event) => {
+                if (event.target === aboutModal) {
+                    aboutModal.classList.add('hidden');
+                }
+            });
+        }
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                window.location.href = '/';
+            });
+        }
+    </script>
 </body>
 </html>
