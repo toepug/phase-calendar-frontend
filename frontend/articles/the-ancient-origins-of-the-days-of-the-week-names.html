@@ -5,47 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Explore the fascinating history of the days of the week names, from Roman gods to Norse myths, and discover how The Phase Calendar simplifies scheduling.">
     <title>The Ancient Origins of the Days of the Week Names</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/3dee4c5dfb.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/png" href="/phase-calendar-logo.png">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        .article-date {
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-bottom: 30px;
         }
-        h1 {
-            font-size: 2.2em;
+        .blog-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 20px 40px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            line-height: 1.7;
             color: #333;
         }
-        h2 {
-            font-size: 1.8em;
-            color: #444;
-            margin-top: 30px;
-        }
-        h4 {
-            font-size: 1.4em;
-            color: #555;
-        }
-        p {
+        .blog-container h2 {
+            font-size: 2em;
+            color: #2c3e50;
             margin-bottom: 20px;
         }
-        a {
-            color: #007bff;
+        .blog-container h4 {
+            font-size: 1.4em;
+            color: #34495e;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        .blog-container a {
+            color: #3498db;
             text-decoration: none;
         }
-        a:hover {
+        .blog-container a:hover {
             text-decoration: underline;
         }
         .cta-button {
             display: inline-block;
             padding: 10px 20px;
             background-color: #28a745;
-            color: white;
+            color: white !important; /* Ensure text is white */
             border-radius: 5px;
             text-align: center;
-            text-decoration: none;
             font-weight: bold;
             margin-top: 20px;
         }
@@ -56,69 +66,134 @@
     </style>
 </head>
 <body>
-    <h1>The Ancient Origins of the Days of the Week Names</h1>
+    <div class="header-with-logo">
+        <a href="/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 15px;">
+             <img src="/phase-calendar-logo.png" alt="Phase Calendar Logo" class="main-logo">
+             <h1>Phase Calendar</h1>
+        </a>
+    </div>
 
-    <h2>Introduction: Why Do We Call Thursday "Thursday"?</h2>
-    <p>Have you ever paused to wonder why we call the <strong>days of the week</strong> by names like Monday, Tuesday, or Thursday? These labels, so familiar in our daily lives, carry a rich, multicultural history that stretches back over two millennia to the ancient Romans. The <strong>days of the week names</strong> weave a tapestry of celestial bodies, Greco-Roman deities, and Norse mythology, reflecting the cultural exchanges that shaped Western civilization. While this history is fascinating, it also creates practical challenges in modern scheduling—confusion over abbreviations and overlapping initials. Enter <strong>The Phase Calendar</strong>, a revolutionary app that sidesteps these quirks with a clean, logical system, replacing traditional weekday names with a 6-day row coordinate system (e.g., EPR1, EPR2). Let’s dive into the <strong>history of weekday names</strong> and explore how a modern solution can streamline your life.</p>
+    <div class="top-right-buttons">
+        <span id="loggedInUsername" class="hidden"></span>
+        <a href="/blog.html"><button class="header-button">Blog</button></a>
+        <button id="aboutBtn" class="header-button">About</button>
+        <button id="logoutBtn" class="header-button">Login</button>
+    </div>
 
-    <h2>From Planets to Gods: The Roman Roots of Weekday Names</h2>
-    <p>The <strong>days of the week names</strong> we use today trace their origins to the ancient Roman system, which tied each day to one of the seven classical celestial bodies: the Sun, Moon, Mars, Mercury, Jupiter, Venus, and Saturn. In Roman culture, these celestial bodies were personified as gods, and the seven-day week—formalized around the 1st century BCE—reflected this cosmic order. Each day was dedicated to a deity associated with its respective planet or luminary, a system known as the "planetary week."</p>
-    <p>This structure wasn’t just practical; it was deeply symbolic, aligning daily life with the heavens. The Romans named their days as follows:</p>
-    <ul>
-        <li><strong>Sunday</strong>: <em>Dies Solis</em> (Day of the Sun).</li>
-        <li><strong>Monday</strong>: <em>Dies Lunae</em> (Day of the Moon).</li>
-        <li><strong>Tuesday</strong>: <em>Dies Martis</em> (Day of Mars, god of war).</li>
-        <li><strong>Wednesday</strong>: <em>Dies Mercurii</em> (Day of Mercury, god of commerce and communication).</li>
-        <li><strong>Thursday</strong>: <em>Dies Iovis</em> (Day of Jupiter, king of the gods).</li>
-        <li><strong>Friday</strong>: <em>Dies Veneris</em> (Day of Venus, goddess of love).</li>
-        <li><strong>Saturday</strong>: <em>Dies Saturni</em> (Day of Saturn, god of agriculture and time).</li>
-    </ul>
-    <p>This Greco-Roman framework spread across the Roman Empire, influencing cultures far and wide. But as it reached the Germanic and Norse peoples of Northern Europe, the names evolved, blending Roman structure with local mythology.</p>
+    <div class="blog-container">
+        <h2>The Ancient Origins of the Days of the Week Names</h2>
+        <p class="article-date">October 13, 2025</p>
+        
+        <h4>Introduction: Why Do We Call Thursday "Thursday"?</h4>
+        <p>Have you ever paused to wonder why we call the <strong>days of the week</strong> by names like Monday, Tuesday, or Thursday? These labels, so familiar in our daily lives, carry a rich, multicultural history that stretches back over two millennia to the ancient Romans. The <strong>days of the week names</strong> weave a tapestry of celestial bodies, Greco-Roman deities, and Norse mythology, reflecting the cultural exchanges that shaped Western civilization. While this history is fascinating, it also creates practical challenges in modern scheduling—confusion over abbreviations and overlapping initials. Enter <strong>The Phase Calendar</strong>, a revolutionary app that sidesteps these quirks with a clean, logical system, replacing traditional weekday names with a 6-day row coordinate system (e.g., EPR1, EPR2). Let’s dive into the <strong>history of weekday names</strong> and explore how a modern solution can streamline your life.</p>
 
-    <h2>The Norse & Anglo-Saxon Influence on Weekday Names</h2>
-    <p>As the Roman seven-day week spread to Germanic tribes and Norse cultures around the 4th century CE, local traditions reshaped the <strong>days of the week names</strong>. Instead of adopting Roman gods wholesale, these cultures substituted their own deities, who shared similar attributes, creating a hybrid system that persists in English today. Let’s break down the <strong>history of weekday names</strong> day by day.</p>
+        <h4>From Planets to Gods: The Roman Roots of Weekday Names</h4>
+        <p>The <strong>days of the week names</strong> we use today trace their origins to the ancient Roman system, which tied each day to one of the seven classical celestial bodies: the Sun, Moon, Mars, Mercury, Jupiter, Venus, and Saturn. In Roman culture, these celestial bodies were personified as gods, and the seven-day week—formalized around the 1st century BCE—reflected this cosmic order. Each day was dedicated to a deity associated with its respective planet or luminary, a system known as the "planetary week."</p>
+        <p>This structure wasn’t just practical; it was deeply symbolic, aligning daily life with the heavens. The Romans named their days as follows:</p>
+        <ul>
+            <li><strong>Sunday</strong>: <em>Dies Solis</em> (Day of the Sun).</li>
+            <li><strong>Monday</strong>: <em>Dies Lunae</em> (Day of the Moon).</li>
+            <li><strong>Tuesday</strong>: <em>Dies Martis</em> (Day of Mars, god of war).</li>
+            <li><strong>Wednesday</strong>: <em>Dies Mercurii</em> (Day of Mercury, god of commerce and communication).</li>
+            <li><strong>Thursday</strong>: <em>Dies Iovis</em> (Day of Jupiter, king of the gods).</li>
+            <li><strong>Friday</strong>: <em>Dies Veneris</em> (Day of Venus, goddess of love).</li>
+            <li><strong>Saturday</strong>: <em>Dies Saturni</em> (Day of Saturn, god of agriculture and time).</li>
+        </ul>
+        <p>This Greco-Roman framework spread across the Roman Empire, influencing cultures far and wide. But as it reached the Germanic and Norse peoples of Northern Europe, the names evolved, blending Roman structure with local mythology.</p>
 
-    <h4>Sunday and Monday: The Sun and Moon Endure</h4>
-    <p><strong>Sunday</strong> and <strong>Monday</strong> retained their celestial roots, as the Sun and Moon were universal concepts that didn’t require divine substitution. In Old English, Sunday was <em>Sunnandæg</em> (Day of the Sun), and Monday was <em>Mōnandæg</em> (Day of the Moon). These names, derived from the Roman <em>Dies Solis</em> and <em>Dies Lunae</em>, carried forward with minimal change, reflecting the enduring reverence for these celestial bodies.</p>
+        <h4>The Norse & Anglo-Saxon Influence on Weekday Names</h4>
+        <p>As the Roman seven-day week spread to Germanic tribes and Norse cultures around the 4th century CE, local traditions reshaped the <strong>days of the week names</strong>. Instead of adopting Roman gods wholesale, these cultures substituted their own deities, who shared similar attributes, creating a hybrid system that persists in English today. Let’s break down the <strong>history of weekday names</strong> day by day.</p>
 
-    <h4>Tuesday: From Mars to Tiw</h4>
-    <p><strong>Tuesday</strong> comes from <em>Tiwesdæg</em> in Old English, named for Tiw (or Týr in Norse mythology), the one-handed god of war and justice. The Germanic peoples replaced the Roman god Mars, associated with war and aggression, with Týr, who shared similar martial qualities. This substitution preserved the day’s martial theme while grounding it in local lore.</p>
+        <h5>Sunday and Monday: The Sun and Moon Endure</h5>
+        <p><strong>Sunday</strong> and <strong>Monday</strong> retained their celestial roots, as the Sun and Moon were universal concepts that didn’t require divine substitution. In Old English, Sunday was <em>Sunnandæg</em> (Day of the Sun), and Monday was <em>Mōnandæg</em> (Day of the Moon). These names, derived from the Roman <em>Dies Solis</em> and <em>Dies Lunae</em>, carried forward with minimal change, reflecting the enduring reverence for these celestial bodies.</p>
 
-    <h4>Wednesday: Woden Replaces Mercury</h4>
-    <p><strong>Wednesday</strong> derives from <em>Wōdnesdæg</em>, honoring Woden (or Odin), the chief Norse god of wisdom, poetry, and magic. The Romans dedicated this day to Mercury, the swift-footed messenger god, but the Germanic tribes saw Woden as a fitting counterpart due to his role as a guide of souls and seeker of knowledge. The <strong>history of Wednesday</strong> reflects this blend of Roman structure and Norse reverence.</p>
+        <h5>Tuesday: From Mars to Tiw</h5>
+        <p><strong>Tuesday</strong> comes from <em>Tiwesdæg</em> in Old English, named for Tiw (or Týr in Norse mythology), the one-handed god of war and justice. The Germanic peoples replaced the Roman god Mars, associated with war and aggression, with Týr, who shared similar martial qualities. This substitution preserved the day’s martial theme while grounding it in local lore.</p>
 
-    <h4>Thursday: Thor, the Thunderer, for Jupiter</h4>
-    <p><strong>Thursday</strong>, or <em>Þunresdæg</em> in Old English, is named for Thor, the Norse god of thunder, strength, and protection. The Romans tied this day to Jupiter, the king of the gods and wielder of thunderbolts, making Thor—with his mighty hammer Mjölnir—a natural substitute. The <strong>history of Thursday</strong> highlights this vivid connection between celestial power and earthly might.</p>
+        <h5>Wednesday: Woden Replaces Mercury</h5>
+        <p><strong>Wednesday</strong> derives from <em>Wōdnesdæg</em>, honoring Woden (or Odin), the chief Norse god of wisdom, poetry, and magic. The Romans dedicated this day to Mercury, the swift-footed messenger god, but the Germanic tribes saw Woden as a fitting counterpart due to his role as a guide of souls and seeker of knowledge. The <strong>history of Wednesday</strong> reflects this blend of Roman structure and Norse reverence.</p>
 
-    <h4>Friday: Frigg or Freya for Venus</h4>
-    <p><strong>Friday</strong>, from <em>Frīgedæg</em>, honors Frigg (or possibly Freya), the Norse goddess of love, beauty, and fertility. The Romans dedicated this day to Venus, goddess of love, and the Germanic substitution of Frigg or Freya maintained the theme of feminine allure and creativity. Scholars debate whether Frigg or Freya is the true namesake, but both reflect a shared archetype.</p>
+        <h5>Thursday: Thor, the Thunderer, for Jupiter</h5>
+        <p><strong>Thursday</strong>, or <em>Þunresdæg</em> in Old English, is named for Thor, the Norse god of thunder, strength, and protection. The Romans tied this day to Jupiter, the king of the gods and wielder of thunderbolts, making Thor—with his mighty hammer Mjölnir—a natural substitute. The <strong>history of Thursday</strong> highlights this vivid connection between celestial power and earthly might.</p>
 
-    <h4>Saturday: Saturn Stands Alone</h4>
-    <p><strong>Saturday</strong> is unique in retaining its Roman name, <em>Dies Saturni</em>, becoming <em>Sæternesdæg</em> in Old English. Saturn, the Roman god of agriculture and time, had no direct Norse equivalent, so the name carried over largely unchanged. This makes Saturday a direct link to the Roman planetary week.</p>
+        <h5>Friday: Frigg or Freya for Venus</h5>
+        <p><strong>Friday</strong>, from <em>Frīgedæg</em>, honors Frigg (or possibly Freya), the Norse goddess of love, beauty, and fertility. The Romans dedicated this day to Venus, goddess of love, and the Germanic substitution of Frigg or Freya maintained the theme of feminine allure and creativity. Scholars debate whether Frigg or Freya is the true namesake, but both reflect a shared archetype.</p>
 
-    <h2>Evolution and Pronunciation: From Old English to Today</h2>
-    <p>The <strong>days of the week names</strong> we use today evolved from their Old English forms through centuries of linguistic shifts. For example, <em>Wōdnesdæg</em> softened into “Wednesday,” with its tricky silent “d” and vowel shifts, while <em>Þunresdæg</em> became “Thursday,” losing the thorn (Þ) sound unique to Old English. These changes, driven by phonetic simplification and Middle English influences, gave us the familiar spellings and pronunciations we know today. Yet, this evolution also introduced quirks—like the inconsistent spelling of Wednesday or the silent letters in Thursday—that can trip up even native speakers.</p>
+        <h5>Saturday: Saturn Stands Alone</h5>
+        <p><strong>Saturday</strong> is unique in retaining its Roman name, <em>Dies Saturni</em>, becoming <em>Sæternesdæg</em> in Old English. Saturn, the Roman god of agriculture and time, had no direct Norse equivalent, so the name carried over largely unchanged. This makes Saturday a direct link to the Roman planetary week.</p>
 
-    <h2>The Modern-Day "T" and "S" Problem: Scheduling Confusion</h2>
-    <p>While the <strong>history of weekday names</strong> is captivating, it creates practical challenges in modern life. One major issue is the overlap in abbreviations: <strong>Tuesday</strong> and <strong>Thursday</strong> both start with “T,” while <strong>Saturday</strong> and <strong>Sunday</strong> begin with “S.” This ambiguity plagues calendars, schedulers, and digital tools. For example:</p>
-    <ul>
-        <li>A meeting scheduled for “T” could mean Tuesday or Thursday, leading to missed appointments or miscommunications.</li>
-        <li>An event marked for “S” might refer to Saturday or Sunday, causing confusion in group planning or automated systems.</li>
-    </ul>
-    <p>In industries like healthcare, education, or project management, where precise scheduling is critical, these overlaps can lead to errors, wasted time, and frustration. The <strong>days of the week names</strong>, rooted in ancient mythology, weren’t designed for the precision demanded by today’s fast-paced, interconnected world.</p>
+        <h4>The Modern-Day "T" and "S" Problem: Scheduling Confusion</h4>
+        <p>While the <strong>history of weekday names</strong> is captivating, it creates practical challenges in modern life. One major issue is the overlap in abbreviations: <strong>Tuesday</strong> and <strong>Thursday</strong> both start with “T,” while <strong>Saturday</strong> and <strong>Sunday</strong> begin with “S.” This ambiguity plagues calendars, schedulers, and digital tools. For example:</p>
+        <ul>
+            <li>A meeting scheduled for “T” could mean Tuesday or Thursday, leading to missed appointments or miscommunications.</li>
+            <li>An event marked for “S” might refer to Saturday or Sunday, causing confusion in group planning or automated systems.</li>
+        </ul>
+        <p>In industries like healthcare, education, or project management, where precise scheduling is critical, these overlaps can lead to errors, wasted time, and frustration. The <strong>days of the week names</strong>, rooted in ancient mythology, weren’t designed for the precision demanded by today’s fast-paced, interconnected world.</p>
 
-    <h2>A Simpler System: The Phase Calendar</h2>
-    <p>Enter <a href="https://phasecalendar.com" target="_blank" rel="noopener">The Phase Calendar</a>, a forward-thinking app that reimagines timekeeping for the modern era. Unlike the Gregorian calendar, which clings to the seven-day week and its ambiguous <strong>days of the week names</strong>, The Phase Calendar uses a <strong>6-day row</strong> as its core unit. Days are identified with a clear, logical coordinate system—such as <strong>EPR1</strong> (Early Prophase, Row R, Column 1) or <strong>LTR4</strong> (Late Telophase, Row Y, Column 4)—based on its five symmetrical phases: Prophase, Metaphase, Anaphase, Telophase, and Interphase.</p>
-    <p>This system eliminates the “T” and “S” problem entirely. By replacing traditional weekday names with unique coordinates, The Phase Calendar ensures:</p>
-    <ul>
-        <li><strong>Clarity</strong>: No more guessing whether “T” means Tuesday or Thursday—each day has a distinct identifier.</li>
-        <li><strong>Efficiency</strong>: The coordinate system streamlines scheduling, making it ideal for project management, personal planning, or modern work schedules like the 4-day work week.</li>
-        <li><strong>Visual Intuition</strong>: Color-coded rows (R, G, B, C, Y, V) and numbered columns make days easy to track at a glance.</li>
-    </ul>
-    <p>Whether you’re coordinating a global team or planning your week, The Phase Calendar offers a cleaner, less error-prone alternative to the Gregorian system.</p>
+        <h4>A Simpler System: The Phase Calendar</h4>
+        <p>Enter <a href="https://phasecalendar.com" target="_blank" rel="noopener">The Phase Calendar</a>, a forward-thinking app that reimagines timekeeping for the modern era. Unlike the Gregorian calendar, which clings to the seven-day week and its ambiguous <strong>days of the week names</strong>, The Phase Calendar uses a <strong>6-day row</strong> as its core unit. Days are identified with a clear, logical coordinate system—such as <strong>EPR1</strong> (Early Prophase, Row R, Column 1) or <strong>LTR4</strong> (Late Telophase, Row Y, Column 4)—based on its five symmetrical phases: Prophase, Metaphase, Anaphase, Telophase, and Interphase.</p>
+        <p>This system eliminates the “T” and “S” problem entirely. By replacing traditional weekday names with unique coordinates, The Phase Calendar ensures:</p>
+        <ul>
+            <li><strong>Clarity</strong>: No more guessing whether “T” means Tuesday or Thursday—each day has a distinct identifier.</li>
+            <li><strong>Efficiency</strong>: The coordinate system streamlines scheduling, making it ideal for project management, personal planning, or modern work schedules like the 4-day work week.</li>
+            <li><strong>Visual Intuition</strong>: Color-coded rows (R, G, B, C, Y, V) and numbered columns make days easy to track at a glance.</li>
+        </ul>
 
-    <h2>Conclusion: A Modern Calendar for a Modern World</h2>
-    <p>The <strong>days of the week names</strong> carry a vibrant legacy, blending Roman astronomy with Norse mythology in a story that spans centuries. From the Sun and Moon to Thor’s thunder, these names connect us to our cultural past. But their quirks—overlapping abbreviations, inconsistent spellings—can complicate modern scheduling. <strong>The Phase Calendar</strong> honors this history while offering a solution tailored for today’s clarity and efficiency. By swapping ambiguous weekday names for a precise 6-day row system, it empowers you to plan with confidence, free from the confusion of “T” or “S.”</p>
-    <p>Ready to break free from ancient naming pitfalls and embrace a smarter way to organize your time? <a href="https://phasecalendar.com" class="cta-button">Download The Phase Calendar today</a> and step into a world of streamlined scheduling. Make every day count!</p>
+        <h4>Conclusion: A Modern Calendar for a Modern World</h4>
+        <p>The <strong>days of the week names</strong> carry a vibrant legacy, blending Roman astronomy with Norse mythology in a story that spans centuries. From the Sun and Moon to Thor’s thunder, these names connect us to our cultural past. But their quirks—overlapping abbreviations, inconsistent spellings—can complicate modern scheduling. <strong>The Phase Calendar</strong> honors this history while offering a solution tailored for today’s clarity and efficiency. By swapping ambiguous weekday names for a precise 6-day row system, it empowers you to plan with confidence, free from the confusion of “T” or “S.”</p>
+        <p>Ready to break free from ancient naming pitfalls and embrace a smarter way to organize your time? <a href="https://phasecalendar.com" class="cta-button">Try The Phase Calendar today!</a></p>
+    </div>
+
+    <!-- Modals for About/Confirm Functionality -->
+    <div id="about-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <h2>About the Phase Calendar</h2>
+            <p>The Phase Calendar offers a <strong>simple, unique, and visually intuitive way to organize and view the year.</strong> Instead of traditional months, it divides the year into <strong>five distinct phases</strong>...</p>
+            <!-- (Full about text would go here) -->
+            <div class="modal-buttons">
+                <button id="about-close-btn" class="confirm-button confirm-no">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="custom-confirm-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <p id="confirm-message"></p>
+            <div class="modal-buttons">
+                <button id="confirm-yes" class="confirm-button confirm-yes">Yes</button>
+                <button id="confirm-no" class="confirm-button confirm-no">No</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to handle header button functionality -->
+    <script>
+        const aboutBtn = document.getElementById('aboutBtn');
+        const aboutModal = document.getElementById('about-modal');
+        const aboutCloseBtn = document.getElementById('about-close-btn');
+
+        if (aboutBtn && aboutModal && aboutCloseBtn) {
+            aboutBtn.addEventListener('click', () => {
+                aboutModal.classList.remove('hidden');
+            });
+
+            aboutCloseBtn.addEventListener('click', () => {
+                aboutModal.classList.add('hidden');
+            });
+
+            aboutModal.addEventListener('click', (event) => {
+                if (event.target === aboutModal) {
+                    aboutModal.classList.add('hidden');
+                }
+            });
+        }
+
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                window.location.href = '/';
+            });
+        }
+    </script>
 </body>
 </html>
