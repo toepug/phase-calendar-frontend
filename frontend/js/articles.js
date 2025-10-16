@@ -1,6 +1,10 @@
-// In js/articles.js
-
 const articles = [
+    {
+        title: "The Ambiguity of Our Calendar & A Simpler System",
+        date: "October 21, 2025",
+        description: "Discover how calendar ambiguity complicates identifying a date and how The Phase Calendar’s unique names eliminate confusion for effortless planning.",
+        url: "articles/the-ambiguity-of-our-calendar.html"
+    },
     {
         title: "The Confusing History of the Names of the Months",
         date: "October 16, 2025",
@@ -17,7 +21,7 @@ const articles = [
         title: "The 4-Day Work Week & The Calendar Problem",
         date: "October 10, 2025",
         description: "Discover how the 4-day work week boosts productivity and well-being, and why the Phase Calendar’s 6-day row solves scheduling woes. Try it today!",
-        url: "articles/the-4-day-work-week.html"
+        url: "articles/4-day-work-week.html"
     },
     {
         title: "Why Is Our Calendar So Weird? The Case for a More Logical Year",
@@ -26,5 +30,4 @@ const articles = [
         url: "articles/why-our-calendar-is-weird.html"
     }
 ];
-
 
